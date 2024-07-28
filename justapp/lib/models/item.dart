@@ -10,7 +10,10 @@ abstract class Printable {
 // Can be a singleton
 // who needs the skill to print stuff 
 class Order {
+  final int id;
   final List<Item> items = <Item>[];
+  
+  Order({required this.id});
   
   void addItem(Item item) {
     items.add(item);
@@ -30,7 +33,12 @@ class Order {
 }
 
 class Layout {
+  final int id;
+  final String name;
   final List<Item> items = <Item>[];
+  bool isActive = false;
+
+  Layout({required this.id, required this.name});
 
   void addItem(Item item) {
     items.add(item);
