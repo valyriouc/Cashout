@@ -20,8 +20,7 @@ class CreateLayoutView extends StatelessWidget {
             ),
           ],
         ),
-        body: 
+        body: const Center(child: Text("Create a layout"))
       );
   }
-  
 }

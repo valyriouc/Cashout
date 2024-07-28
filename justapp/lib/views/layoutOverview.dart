@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:justapp/backend/repository.dart';
+import 'package:justapp/views/createLayoutView.dart';
+import 'package:justapp/views/mainView.dart';
 
 class LayoutOverview extends StatelessWidget {
   const LayoutOverview({super.key});
@@ -15,18 +17,21 @@ class LayoutOverview extends StatelessWidget {
               onPressed: () => {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const LayoutOverview()))
+                    builder: (context) => MainView()))
+              }, 
+              child: const Text("Home")
+            ),
+            TextButton(
+              onPressed: () => {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CreateLayoutView()))
               }, 
               child: const Text("Create")
             ),
           ],
         ),
-        body: ListView.builder(
-          itemCount: Repository.layouts.length,
-          itemBuilder: (context, index) {
-            return TextButton(child: Text("layout"), onPressed: () => {},);
-          } 
-        ),
-      );
+        body: const Text("Layout overview") 
+    );
   }
 }

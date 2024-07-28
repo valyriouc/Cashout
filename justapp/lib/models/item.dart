@@ -60,7 +60,7 @@ class Layout {
 enum ItemCategory {
   drinkWithAlcohol,
   drinkWithoutAlcohol,
-  dood,
+  food,
   deposit 
 }
 

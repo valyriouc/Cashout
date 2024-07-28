@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:justapp/backend/repository.dart';
 import 'package:justapp/views/layoutOverview.dart';
 
 class MainView extends StatelessWidget {
-  const MainView({super.key});
+  final TextEditingController _controller = new TextEditingController();
+
+  MainView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,32 @@ class MainView extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(child: Text("Main view")),
+        body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: 'Enter item',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: Repository.getActive()?.items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: TextButton(
+                    child: Text(Repository.getActive()?.items[index].name ?? "test"), 
+                    onPressed: () => {},),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
       );
   }
 }
