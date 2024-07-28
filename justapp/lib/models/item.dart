@@ -1,7 +1,32 @@
 
+abstract class Printer {
+  void print(Printable item);
+}
+
+abstract class Printable {
+  String toPrintOutput();
+}
+
+// Can be a singleton
+// who needs the skill to print stuff 
 class Order {
   final List<Item> items = <Item>[];
+  
+  void addItem(Item item) {
+    items.add(item);
+  }
 
+  void printOrder(Printer printer) { 
+
+  }
+
+  void removeOrder(int id) {
+    items.removeWhere((item) => item.id == id);
+  }
+
+  void resetOrder() {
+    items.clear();  
+  }
 }
 
 class Layout {
@@ -31,7 +56,7 @@ enum ItemCategory {
   deposit 
 }
 
-class Item {
+class Item implements Printable{
   int id;
   String name; 
   int price;
@@ -42,5 +67,10 @@ class Item {
     required this.name, 
     required this.price,
     required this.category});
+    
+  @override
+  String toPrintOutput() {
+    // TODO: implement toPrintOutput
+    throw UnimplementedError();
+  }
 }
-
