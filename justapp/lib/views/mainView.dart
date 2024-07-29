@@ -49,14 +49,14 @@ class MainView extends StatelessWidget {
                   title: TextButton(
                     child: Text(Repository.getActive()?.items[index].name ?? "test"), 
                     onPressed: () {
-                      double amount = double.parse(_controller.text);
+                      double amount = double.parse(_controller.text.replaceFirst("€", ""));
                       Item? item = Repository.getActive()?.items[index];
                       if (item == null) {
                         return;
                       }
                       selectedItems.add(item);
                       amount += item.price / 100;
-                      _controller.text = amount.toString();
+                      _controller.text = "$amount€";
                     }),
                 );
               },
