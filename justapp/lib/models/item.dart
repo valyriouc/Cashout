@@ -1,4 +1,6 @@
 
+import 'package:uuid/uuid.dart';
+
 abstract class Printer {
   void print(Printable item);
 }
@@ -10,11 +12,11 @@ abstract class Printable {
 // Can be a singleton
 // who needs the skill to print stuff 
 class Order {
-  final int id;
+  String id;
   final List<Item> items = <Item>[];
   
-  Order({required this.id});
-  
+  Order() : id = const Uuid().v4();
+
   void addItem(Item item) {
     items.add(item);
   }
