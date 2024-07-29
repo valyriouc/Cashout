@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:justapp/backend/repository.dart';
+import 'package:justapp/models/item.dart';
 import 'package:justapp/views/layoutOverview.dart';
 
 class MainView extends StatelessWidget {
   final TextEditingController _controller = new TextEditingController();
+  final List<Item> selectedItems = <Item>[];
 
-  MainView({super.key});
+  MainView({super.key}) {
+    _controller.text = "0";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,9 @@ class MainView extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _controller,
+              enabled: false,
               decoration: const InputDecoration(
-                labelText: 'Enter item',
+                labelText: 'Price',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -43,7 +48,16 @@ class MainView extends StatelessWidget {
                 return ListTile(
                   title: TextButton(
                     child: Text(Repository.getActive()?.items[index].name ?? "test"), 
-                    onPressed: () => {},),
+                    onPressed: () {
+                      double amount = double.parse(_controller.text);
+                      Item? item = Repository.getActive()?.items[index];
+                      if (item == null) {
+                        return;
+                      }
+                      selectedItems.add(item);
+                      amount += item.price / 100;
+                      _controller.text = amount.toString();
+                    }),
                 );
               },
             ),
